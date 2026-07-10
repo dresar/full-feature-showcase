@@ -74,16 +74,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AI Poster Prompt Studio — Admin Dashboard" },
+      { title: "Studio Prompt — Admin Dashboard" },
       {
         name: "description",
         content:
-          "Admin dashboard neubrutalist untuk mengelola AI Poster Prompt Studio: kunci Gemini, pengaturan, gaya visual, lisensi, dan audit log.",
+          "Admin dashboard neubrutalist untuk mengelola Studio Prompt: kunci Gemini, pengaturan, gaya visual, lisensi, dan audit log.",
       },
-      { property: "og:title", content: "AI Poster Prompt Studio — Admin Dashboard" },
+      { property: "og:title", content: "Studio Prompt — Admin Dashboard" },
       {
         property: "og:description",
-        content: "Portal admin untuk mengelola AI Poster Prompt Studio.",
+        content: "Portal admin untuk mengelola Studio Prompt.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -107,11 +107,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Scripts />
       </body>

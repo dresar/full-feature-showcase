@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_admin/dashboard")({
 
 type Stats = {
   totalUsers?: number;
-  activeLicenses?: number;
+  promptsToday?: number;
   avgViralScore?: number;
   healthyGeminiKeys?: number;
   usage7d?: { date: string; count: number }[];
@@ -28,7 +28,17 @@ type Stats = {
 function DashboardPage() {
   const { data, isFetching, refetch } = useQuery<Stats>({
     queryKey: ["admin", "stats"],
-    queryFn: () => api<Stats>("/admin/stats"),
+    queryFn: async () => {
+      const r = await api<any>("/admin/stats");
+      const d = r.data || r;
+      return {
+        totalUsers: d.totalUsers,
+        promptsToday: d.totalPromptsToday,
+        avgViralScore: d.averageViralScore,
+        healthyGeminiKeys: d.geminiKeys?.healthy,
+        usage7d: d.chartData || [],
+      };
+    },
   });
 
   const s = data || {};
@@ -37,27 +47,31 @@ function DashboardPage() {
   const cards = [
     {
       label: "Total Pengguna",
-      value: s.totalUsers ?? "—",
+      value: s.totalUsers ?? 0,
       icon: Users,
-      bg: "bg-[var(--nb-yellow)]",
+      bgColor: "var(--nb-yellow)",
+      textColor: "black",
     },
     {
-      label: "Lisensi Aktif",
-      value: s.activeLicenses ?? "—",
-      icon: Ticket,
-      bg: "bg-[var(--nb-green)] text-white",
+      label: "Prompt Hari Ini",
+      value: s.promptsToday ?? 0,
+      icon: Sparkles,
+      bgColor: "var(--nb-green)",
+      textColor: "white",
     },
     {
       label: "Skor Viral Rata-rata",
-      value: s.avgViralScore ?? "—",
-      icon: Sparkles,
-      bg: "bg-[var(--nb-pink)] text-white",
+      value: s.avgViralScore ?? 0,
+      icon: Ticket,
+      bgColor: "var(--nb-pink)",
+      textColor: "white",
     },
     {
-      label: "Kunci Gemini Sehat",
-      value: s.healthyGeminiKeys ?? "—",
+      label: "Kunci Provider Sehat",
+      value: s.healthyGeminiKeys ?? 0,
       icon: KeyRound,
-      bg: "bg-[var(--nb-blue)] text-white",
+      bgColor: "var(--nb-blue)",
+      textColor: "white",
     },
   ];
 
@@ -65,7 +79,7 @@ function DashboardPage() {
     <div className="space-y-6">
       <div className="flex items-end justify-between flex-wrap gap-3">
         <div>
-          <h2 className="text-2xl">📊 Ringkasan</h2>
+          <h2 className="text-2xl font-bold uppercase">📊 Ringkasan</h2>
           <p className="text-sm text-muted-foreground font-mono">
             Statistik real-time platform.
           </p>
@@ -84,9 +98,13 @@ function DashboardPage() {
         {cards.map((c) => {
           const Icon = c.icon;
           return (
-            <div key={c.label} className={`${nb.card} p-5 ${c.bg}`}>
+            <div 
+              key={c.label} 
+              className={`${nb.card} p-5 shadow-[4px_4px_0_0_rgba(0,0,0,1)] border-2 border-black`}
+              style={{ backgroundColor: c.bgColor, color: c.textColor }}
+            >
               <Icon className="w-6 h-6 mb-3" strokeWidth={2.5} />
-              <p className="text-xs uppercase font-bold">{c.label}</p>
+              <p className="text-xs uppercase font-bold opacity-80">{c.label}</p>
               <p className="text-4xl font-mono font-bold mt-1">{String(c.value)}</p>
             </div>
           );

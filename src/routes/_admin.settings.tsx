@@ -16,6 +16,15 @@ type AppSettings = {
   footerText?: string;
   bannerPosterInfo?: string;
   bannerEnhanceInfo?: string;
+  defaultAIProvider?: string;
+  packages?: Array<{
+    id: string;
+    name: string;
+    priceText: string;
+    billingCycle: string;
+    credits: number;
+    checkoutUrl: string;
+  }>;
 };
 
 type ImageKitSettings = {
@@ -114,6 +123,17 @@ function SettingsPage() {
             />
           </Field>
 
+          <Field label="Default AI Provider">
+            <select
+              value={app.defaultAIProvider || "gemini"}
+              onChange={(e) => setApp({ ...app, defaultAIProvider: e.target.value })}
+              className={nb.input}
+            >
+              <option value="gemini">Google Gemini (Model: gemini-3.1-flash-lite)</option>
+              <option value="groq">Groq AI (Model: llama-3.3-70b-versatile)</option>
+            </select>
+          </Field>
+
           <Field label="Teks Footer">
             <input
               value={app.footerText || ""}
@@ -189,6 +209,88 @@ function SettingsPage() {
             {saveImg.isPending ? "MENYIMPAN…" : "SIMPAN IMAGEKIT"}
           </button>
         </form>
+      </div>
+
+      <div className={`${nb.card} p-5 space-y-4 mt-6`}>
+        <div className="flex items-center gap-2">
+          <div className="nb-border nb-shadow-sm bg-[var(--nb-yellow)] rounded-md p-2">
+            <Cog className="w-5 h-5 text-black" />
+          </div>
+          <h3 className="text-lg">Konfigurasi Paket Premium (Checkout Link Pihak Ketiga)</h3>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-5">
+          {(app.packages || []).map((pkg, idx) => (
+            <div key={pkg.id || idx} className="border-2 border-black p-4 rounded-[var(--radius)] bg-gray-50 space-y-3">
+              <div className="font-bold text-xs uppercase bg-black text-white px-2.5 py-1 rounded w-max">
+                Paket {idx + 1}: {pkg.id?.toUpperCase()}
+              </div>
+
+              <Field label="Nama Paket">
+                <input
+                  value={pkg.name || ""}
+                  onChange={(e) => {
+                    const newPkgs = [...(app.packages || [])];
+                    newPkgs[idx] = { ...pkg, name: e.target.value };
+                    setApp({ ...app, packages: newPkgs });
+                  }}
+                  className={nb.input}
+                />
+              </Field>
+
+              <Field label="Harga Tampilan (Price Text)">
+                <input
+                  value={pkg.priceText || ""}
+                  onChange={(e) => {
+                    const newPkgs = [...(app.packages || [])];
+                    newPkgs[idx] = { ...pkg, priceText: e.target.value };
+                    setApp({ ...app, packages: newPkgs });
+                  }}
+                  className={nb.input}
+                  placeholder="Rp 49.000"
+                />
+              </Field>
+
+              <Field label="Jumlah Kredit (Prompt)">
+                <input
+                  type="number"
+                  value={pkg.credits ?? 0}
+                  onChange={(e) => {
+                    const newPkgs = [...(app.packages || [])];
+                    newPkgs[idx] = { ...pkg, credits: Number(e.target.value) };
+                    setApp({ ...app, packages: newPkgs });
+                  }}
+                  className={nb.input}
+                />
+              </Field>
+
+              <Field label="Checkout Payment URL">
+                <input
+                  value={pkg.checkoutUrl || ""}
+                  onChange={(e) => {
+                    const newPkgs = [...(app.packages || [])];
+                    newPkgs[idx] = { ...pkg, checkoutUrl: e.target.value };
+                    setApp({ ...app, packages: newPkgs });
+                  }}
+                  className={nb.input}
+                  placeholder="https://link-pembayaran-pihak-ketiga.com/..."
+                />
+              </Field>
+            </div>
+          ))}
+        </div>
+
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            saveApp.mutate();
+          }}
+          className={`${nb.btn} ${nb.btnGreen} w-full`}
+          disabled={saveApp.isPending}
+        >
+          <Save className="w-4 h-4" />
+          {saveApp.isPending ? "MENYIMPAN KONFIGURASI PAKET…" : "SIMPAN KONFIGURASI PAKET PREMIUM"}
+        </button>
       </div>
     </div>
   );

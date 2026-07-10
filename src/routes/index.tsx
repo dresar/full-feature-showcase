@@ -19,8 +19,8 @@ function Index() {
   }, [navigate]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[var(--nb-bg)]">
-      <div className="nb-border nb-shadow bg-white rounded-[var(--radius)] px-8 py-6 font-bold uppercase">
+    <div suppressHydrationWarning className="flex min-h-screen items-center justify-center bg-[var(--nb-bg)]">
+      <div suppressHydrationWarning className="nb-border nb-shadow bg-white rounded-[var(--radius)] px-8 py-6 font-bold uppercase">
         Memuat…
       </div>
     </div>
