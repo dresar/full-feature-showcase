@@ -9,38 +9,149 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminStylesRouteImport } from './routes/_admin.styles'
+import { Route as AdminSettingsRouteImport } from './routes/_admin.settings'
+import { Route as AdminLogsRouteImport } from './routes/_admin.logs'
+import { Route as AdminLicensesRouteImport } from './routes/_admin.licenses'
+import { Route as AdminKeysRouteImport } from './routes/_admin.keys'
+import { Route as AdminDashboardRouteImport } from './routes/_admin.dashboard'
 
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/_admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminStylesRoute = AdminStylesRouteImport.update({
+  id: '/styles',
+  path: '/styles',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLogsRoute = AdminLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLicensesRoute = AdminLicensesRouteImport.update({
+  id: '/licenses',
+  path: '/licenses',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminKeysRoute = AdminKeysRouteImport.update({
+  id: '/keys',
+  path: '/keys',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/dashboard': typeof AdminDashboardRoute
+  '/keys': typeof AdminKeysRoute
+  '/licenses': typeof AdminLicensesRoute
+  '/logs': typeof AdminLogsRoute
+  '/settings': typeof AdminSettingsRoute
+  '/styles': typeof AdminStylesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/dashboard': typeof AdminDashboardRoute
+  '/keys': typeof AdminKeysRoute
+  '/licenses': typeof AdminLicensesRoute
+  '/logs': typeof AdminLogsRoute
+  '/settings': typeof AdminSettingsRoute
+  '/styles': typeof AdminStylesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_admin': typeof AdminRouteWithChildren
+  '/login': typeof LoginRoute
+  '/_admin/dashboard': typeof AdminDashboardRoute
+  '/_admin/keys': typeof AdminKeysRoute
+  '/_admin/licenses': typeof AdminLicensesRoute
+  '/_admin/logs': typeof AdminLogsRoute
+  '/_admin/settings': typeof AdminSettingsRoute
+  '/_admin/styles': typeof AdminStylesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/dashboard'
+    | '/keys'
+    | '/licenses'
+    | '/logs'
+    | '/settings'
+    | '/styles'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/dashboard'
+    | '/keys'
+    | '/licenses'
+    | '/logs'
+    | '/settings'
+    | '/styles'
+  id:
+    | '__root__'
+    | '/'
+    | '/_admin'
+    | '/login'
+    | '/_admin/dashboard'
+    | '/_admin/keys'
+    | '/_admin/licenses'
+    | '/_admin/logs'
+    | '/_admin/settings'
+    | '/_admin/styles'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_admin': {
+      id: '/_admin'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +159,76 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_admin/styles': {
+      id: '/_admin/styles'
+      path: '/styles'
+      fullPath: '/styles'
+      preLoaderRoute: typeof AdminStylesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/settings': {
+      id: '/_admin/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/logs': {
+      id: '/_admin/logs'
+      path: '/logs'
+      fullPath: '/logs'
+      preLoaderRoute: typeof AdminLogsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/licenses': {
+      id: '/_admin/licenses'
+      path: '/licenses'
+      fullPath: '/licenses'
+      preLoaderRoute: typeof AdminLicensesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/keys': {
+      id: '/_admin/keys'
+      path: '/keys'
+      fullPath: '/keys'
+      preLoaderRoute: typeof AdminKeysRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/dashboard': {
+      id: '/_admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminKeysRoute: typeof AdminKeysRoute
+  AdminLicensesRoute: typeof AdminLicensesRoute
+  AdminLogsRoute: typeof AdminLogsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminStylesRoute: typeof AdminStylesRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminKeysRoute: AdminKeysRoute,
+  AdminLicensesRoute: AdminLicensesRoute,
+  AdminLogsRoute: AdminLogsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminStylesRoute: AdminStylesRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
