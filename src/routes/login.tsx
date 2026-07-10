@@ -8,7 +8,7 @@ import { Palette, LogIn } from "lucide-react";
 export const Route = createFileRoute("/login")({
   component: Login,
   head: () => ({
-    meta: [{ title: "Login Admin — AI Poster Prompt Studio" }],
+    meta: [{ title: "Login Admin — Studio Prompt" }],
   }),
 });
 
@@ -27,8 +27,8 @@ function Login() {
         body: { email, password },
       });
       const user = res.user ?? res.data?.user;
-      const accessToken = res.access_token ?? res.accessToken ?? res.data?.access_token;
-      const refreshToken = res.refresh_token ?? res.refreshToken ?? res.data?.refresh_token ?? "";
+      const accessToken = res.access_token ?? res.accessToken ?? res.data?.access_token ?? res.data?.accessToken;
+      const refreshToken = res.refresh_token ?? res.refreshToken ?? res.data?.refresh_token ?? res.data?.refreshToken ?? "";
       if (!user || !accessToken) throw new Error("Respons login tidak valid");
       if (user.role !== "ADMIN") {
         toast.error("Akses Ditolak: Anda bukan administrator");
@@ -53,7 +53,7 @@ function Login() {
           </div>
           <div>
             <h1 className="text-2xl leading-tight">Admin Portal</h1>
-            <p className="text-xs font-mono">AI Poster Prompt Studio</p>
+            <p className="text-xs font-mono">Studio Prompt</p>
           </div>
         </div>
 

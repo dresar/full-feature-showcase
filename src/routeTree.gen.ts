@@ -12,11 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminVouchersRouteImport } from './routes/_admin.vouchers'
+import { Route as AdminUsersRouteImport } from './routes/_admin.users'
 import { Route as AdminStylesRouteImport } from './routes/_admin.styles'
 import { Route as AdminSettingsRouteImport } from './routes/_admin.settings'
 import { Route as AdminLogsRouteImport } from './routes/_admin.logs'
-import { Route as AdminLicensesRouteImport } from './routes/_admin.licenses'
 import { Route as AdminKeysRouteImport } from './routes/_admin.keys'
+import { Route as AdminDropdownsRouteImport } from './routes/_admin.dropdowns'
 import { Route as AdminDashboardRouteImport } from './routes/_admin.dashboard'
 
 const LoginRoute = LoginRouteImport.update({
@@ -33,6 +35,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminVouchersRoute = AdminVouchersRouteImport.update({
+  id: '/vouchers',
+  path: '/vouchers',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminStylesRoute = AdminStylesRouteImport.update({
   id: '/styles',
   path: '/styles',
@@ -48,14 +60,14 @@ const AdminLogsRoute = AdminLogsRouteImport.update({
   path: '/logs',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminLicensesRoute = AdminLicensesRouteImport.update({
-  id: '/licenses',
-  path: '/licenses',
-  getParentRoute: () => AdminRoute,
-} as any)
 const AdminKeysRoute = AdminKeysRouteImport.update({
   id: '/keys',
   path: '/keys',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminDropdownsRoute = AdminDropdownsRouteImport.update({
+  id: '/dropdowns',
+  path: '/dropdowns',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
@@ -68,21 +80,25 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AdminDashboardRoute
+  '/dropdowns': typeof AdminDropdownsRoute
   '/keys': typeof AdminKeysRoute
-  '/licenses': typeof AdminLicensesRoute
   '/logs': typeof AdminLogsRoute
   '/settings': typeof AdminSettingsRoute
   '/styles': typeof AdminStylesRoute
+  '/users': typeof AdminUsersRoute
+  '/vouchers': typeof AdminVouchersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AdminDashboardRoute
+  '/dropdowns': typeof AdminDropdownsRoute
   '/keys': typeof AdminKeysRoute
-  '/licenses': typeof AdminLicensesRoute
   '/logs': typeof AdminLogsRoute
   '/settings': typeof AdminSettingsRoute
   '/styles': typeof AdminStylesRoute
+  '/users': typeof AdminUsersRoute
+  '/vouchers': typeof AdminVouchersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -90,11 +106,13 @@ export interface FileRoutesById {
   '/_admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
   '/_admin/dashboard': typeof AdminDashboardRoute
+  '/_admin/dropdowns': typeof AdminDropdownsRoute
   '/_admin/keys': typeof AdminKeysRoute
-  '/_admin/licenses': typeof AdminLicensesRoute
   '/_admin/logs': typeof AdminLogsRoute
   '/_admin/settings': typeof AdminSettingsRoute
   '/_admin/styles': typeof AdminStylesRoute
+  '/_admin/users': typeof AdminUsersRoute
+  '/_admin/vouchers': typeof AdminVouchersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -102,32 +120,38 @@ export interface FileRouteTypes {
     | '/'
     | '/login'
     | '/dashboard'
+    | '/dropdowns'
     | '/keys'
-    | '/licenses'
     | '/logs'
     | '/settings'
     | '/styles'
+    | '/users'
+    | '/vouchers'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/dashboard'
+    | '/dropdowns'
     | '/keys'
-    | '/licenses'
     | '/logs'
     | '/settings'
     | '/styles'
+    | '/users'
+    | '/vouchers'
   id:
     | '__root__'
     | '/'
     | '/_admin'
     | '/login'
     | '/_admin/dashboard'
+    | '/_admin/dropdowns'
     | '/_admin/keys'
-    | '/_admin/licenses'
     | '/_admin/logs'
     | '/_admin/settings'
     | '/_admin/styles'
+    | '/_admin/users'
+    | '/_admin/vouchers'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -159,6 +183,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_admin/vouchers': {
+      id: '/_admin/vouchers'
+      path: '/vouchers'
+      fullPath: '/vouchers'
+      preLoaderRoute: typeof AdminVouchersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/users': {
+      id: '/_admin/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_admin/styles': {
       id: '/_admin/styles'
       path: '/styles'
@@ -180,18 +218,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLogsRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/_admin/licenses': {
-      id: '/_admin/licenses'
-      path: '/licenses'
-      fullPath: '/licenses'
-      preLoaderRoute: typeof AdminLicensesRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/_admin/keys': {
       id: '/_admin/keys'
       path: '/keys'
       fullPath: '/keys'
       preLoaderRoute: typeof AdminKeysRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/dropdowns': {
+      id: '/_admin/dropdowns'
+      path: '/dropdowns'
+      fullPath: '/dropdowns'
+      preLoaderRoute: typeof AdminDropdownsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/_admin/dashboard': {
@@ -206,20 +244,24 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminDropdownsRoute: typeof AdminDropdownsRoute
   AdminKeysRoute: typeof AdminKeysRoute
-  AdminLicensesRoute: typeof AdminLicensesRoute
   AdminLogsRoute: typeof AdminLogsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
   AdminStylesRoute: typeof AdminStylesRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminVouchersRoute: typeof AdminVouchersRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminDropdownsRoute: AdminDropdownsRoute,
   AdminKeysRoute: AdminKeysRoute,
-  AdminLicensesRoute: AdminLicensesRoute,
   AdminLogsRoute: AdminLogsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
   AdminStylesRoute: AdminStylesRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminVouchersRoute: AdminVouchersRoute,
 }
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
@@ -232,3 +274,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

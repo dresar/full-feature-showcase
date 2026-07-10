@@ -28,7 +28,24 @@ function LogsPage() {
     queryKey: ["admin", "logs"],
     queryFn: async () => {
       const r = await api<any>("/admin/logs");
-      return r.data || r.logs || r;
+      const items = r.data || r.logs || r || [];
+      return items.map((item: any) => {
+        let detailsStr = "—";
+        if (item.detail) {
+          if (typeof item.detail === "string") {
+            detailsStr = item.detail;
+          } else {
+            detailsStr = Object.entries(item.detail)
+              .map(([key, val]) => `${key}: ${typeof val === "object" ? JSON.stringify(val) : val}`)
+              .join(", ");
+          }
+        }
+        return {
+          ...item,
+          userEmail: item.user?.email || item.userEmail || "—",
+          details: detailsStr,
+        };
+      });
     },
   });
 
@@ -71,7 +88,43 @@ function LogsPage() {
       </div>
 
       <div className={`${nb.card} overflow-hidden`}>
-        <div className="overflow-x-auto">
+        {/* Mobile Card List */}
+        <div className="space-y-4 md:hidden p-4 bg-[var(--nb-bg)]/50">
+          {isLoading && (
+            <div className="text-center text-muted-foreground py-8">
+              Memuat…
+            </div>
+          )}
+          {!isLoading && slice.length === 0 && (
+            <div className="text-center text-muted-foreground py-8">
+              Tidak ada log.
+            </div>
+          )}
+          {slice.map((l) => {
+            const ts = l.createdAt || l.timestamp;
+            return (
+              <div key={l.id} className={`${nb.card} p-4 space-y-2.5 bg-white`}>
+                <div className="flex items-center justify-between border-b border-black/10 pb-2">
+                  <span className={`${nb.badge} bg-[var(--nb-yellow)] text-xs`}>{l.action}</span>
+                  <span className="text-[10px] text-muted-foreground font-mono">
+                    {ts ? new Date(ts).toLocaleString("id-ID") : "—"}
+                  </span>
+                </div>
+                <div className="text-xs space-y-1 font-mono">
+                  <div>
+                    <span className="text-muted-foreground font-sans">User:</span> {l.userEmail || "—"}
+                  </div>
+                  <div className="bg-muted p-2 rounded-md border border-black/10 break-all whitespace-pre-wrap mt-1">
+                    {l.details || "—"}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop Table View */}
+        <div className="overflow-x-auto hidden md:block">
           <table className="w-full text-sm">
             <thead className="bg-[var(--nb-blue)] text-white border-b-[3px] border-black">
               <tr className="text-left uppercase text-xs">
