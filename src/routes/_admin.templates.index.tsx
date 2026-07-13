@@ -17,6 +17,11 @@ type Template = {
   template: string;
   isActive: boolean;
   previewImageUrl?: string;
+  viralScore?: number;
+  viralBreakdown?: any;
+  payloadJson?: any;
+  hooks?: string[];
+  analysis?: string;
 };
 
 function TemplatesIndexPage() {
@@ -216,12 +221,66 @@ function TemplatesIndexPage() {
             {/* Template Format Raw */}
             <div className="bg-blue-50 border-2 border-[var(--nb-blue)] rounded p-3">
               <h4 className="text-xs font-bold uppercase text-[var(--nb-blue)] mb-2 flex items-center gap-1">
-                <FileText className="w-4 h-4" /> Template Dasar
+                <FileText className="w-4 h-4" /> Template Dasar (DSL)
               </h4>
               <p className="text-xs font-mono text-gray-700 whitespace-pre-wrap leading-relaxed">
                 {selectedTemplate.template}
               </p>
             </div>
+
+            {/* Viral Score & Breakdown */}
+            {selectedTemplate.viralScore !== undefined && (
+              <div className="bg-yellow-50 border-2 border-yellow-500 rounded p-3 space-y-2">
+                <h4 className="text-xs font-bold uppercase text-yellow-600 flex items-center justify-between">
+                  <span>🔥 Viral Score Metrics</span>
+                  <span className="bg-yellow-500 text-white px-2 py-0.5 rounded text-[10px] font-mono font-bold">
+                    SCORE: {selectedTemplate.viralScore}/100
+                  </span>
+                </h4>
+                {selectedTemplate.viralBreakdown && (
+                  <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-gray-600">
+                    <div>Hook: {selectedTemplate.viralBreakdown.hook || 0}</div>
+                    <div>Visual: {selectedTemplate.viralBreakdown.visual || 0}</div>
+                    <div>Edukasi: {selectedTemplate.viralBreakdown.education || 0}</div>
+                    <div>Engagement: {selectedTemplate.viralBreakdown.engagement || 0}</div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Analysis & Hooks */}
+            {selectedTemplate.analysis && (
+              <div className="bg-green-50 border-2 border-green-500 rounded p-3 space-y-2">
+                <h4 className="text-xs font-bold uppercase text-green-600">
+                  💡 Struktur Analisis
+                </h4>
+                <p className="text-xs text-gray-700 leading-relaxed">
+                  {selectedTemplate.analysis}
+                </p>
+                {selectedTemplate.hooks && selectedTemplate.hooks.length > 0 && (
+                  <div className="space-y-1.5 pt-1 border-t border-green-200">
+                    <span className="text-[10px] font-bold text-green-600 uppercase block">Copywriting Hooks:</span>
+                    {selectedTemplate.hooks.map((h, i) => (
+                      <div key={i} className="text-xs font-semibold bg-white border border-green-100 p-1.5 rounded">
+                        🎯 {h}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Payload JSON */}
+            {selectedTemplate.payloadJson && (
+              <div className="bg-purple-50 border-2 border-purple-500 rounded p-3">
+                <h4 className="text-xs font-bold uppercase text-purple-600 mb-1">
+                  📦 Skema Payload JSON
+                </h4>
+                <pre className="text-[10px] font-mono text-gray-700 bg-white/50 p-2 border border-purple-100 rounded overflow-x-auto max-h-32">
+                  {JSON.stringify(selectedTemplate.payloadJson, null, 2)}
+                </pre>
+              </div>
+            )}
 
             <hr className="border-t-2 border-black/20 my-4" />
 
