@@ -13,6 +13,8 @@ import {
   X,
   Users,
   Layers,
+  UserRound,
+  FileText,
 } from "lucide-react";
 
 export const Route = createFileRoute("/_admin")({
@@ -24,9 +26,12 @@ const tabs = [
   { to: "/users", label: "Kelola User", icon: Users, color: "bg-[var(--nb-pink)] text-white" },
   { to: "/keys", label: "Kunci & API", icon: KeyRound, color: "bg-[var(--nb-blue)] text-white" },
   { to: "/styles", label: "Pustaka Gaya", icon: Palette, color: "bg-[var(--nb-pink)] text-white" },
+  { to: "/characters", label: "Karakter", icon: UserRound, color: "bg-purple-400 text-white" },
+  { to: "/templates", label: "Templates", icon: FileText, color: "bg-teal-400 text-white" },
   { to: "/dropdowns", label: "Dropdown Opsi", icon: Layers, color: "bg-orange-400 text-white" },
   { to: "/vouchers", label: "Voucher & Kredit", icon: Ticket, color: "bg-[var(--nb-green)] text-black" },
   { to: "/settings", label: "Pengaturan", icon: Settings, color: "bg-white text-black" },
+  { to: "/form-infos", label: "Info Form", icon: FileText, color: "bg-blue-400 text-white" },
   { to: "/logs", label: "Audit Log", icon: ScrollText, color: "bg-black text-white" },
 ] as const;
 

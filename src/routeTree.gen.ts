@@ -14,12 +14,29 @@ import { Route as AdminRouteImport } from './routes/_admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminVouchersRouteImport } from './routes/_admin.vouchers'
 import { Route as AdminUsersRouteImport } from './routes/_admin.users'
+import { Route as AdminTemplatesRouteImport } from './routes/_admin.templates'
 import { Route as AdminStylesRouteImport } from './routes/_admin.styles'
 import { Route as AdminSettingsRouteImport } from './routes/_admin.settings'
 import { Route as AdminLogsRouteImport } from './routes/_admin.logs'
 import { Route as AdminKeysRouteImport } from './routes/_admin.keys'
+import { Route as AdminFormInfosRouteImport } from './routes/_admin.form-infos'
 import { Route as AdminDropdownsRouteImport } from './routes/_admin.dropdowns'
 import { Route as AdminDashboardRouteImport } from './routes/_admin.dashboard'
+import { Route as AdminCharactersRouteImport } from './routes/_admin.characters'
+import { Route as AdminUsersIndexRouteImport } from './routes/_admin.users.index'
+import { Route as AdminTemplatesIndexRouteImport } from './routes/_admin.templates.index'
+import { Route as AdminStylesIndexRouteImport } from './routes/_admin.styles.index'
+import { Route as AdminCharactersIndexRouteImport } from './routes/_admin.characters.index'
+import { Route as AdminTemplatesNewRouteImport } from './routes/_admin.templates.new'
+import { Route as AdminStylesNewRouteImport } from './routes/_admin.styles.new'
+import { Route as AdminCharactersNewRouteImport } from './routes/_admin.characters.new'
+import { Route as AdminUsersUserIdIndexRouteImport } from './routes/_admin.users.$userId.index'
+import { Route as AdminStylesStyleIdIndexRouteImport } from './routes/_admin.styles.$styleId.index'
+import { Route as AdminCharactersCharacterIdIndexRouteImport } from './routes/_admin.characters.$characterId.index'
+import { Route as AdminUsersUserIdEditRouteImport } from './routes/_admin.users.$userId.edit'
+import { Route as AdminTemplatesTemplateIdEditRouteImport } from './routes/_admin.templates.$templateId.edit'
+import { Route as AdminStylesStyleIdEditRouteImport } from './routes/_admin.styles.$styleId.edit'
+import { Route as AdminCharactersCharacterIdEditRouteImport } from './routes/_admin.characters.$characterId.edit'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -45,6 +62,11 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminTemplatesRoute = AdminTemplatesRouteImport.update({
+  id: '/templates',
+  path: '/templates',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminStylesRoute = AdminStylesRouteImport.update({
   id: '/styles',
   path: '/styles',
@@ -65,6 +87,11 @@ const AdminKeysRoute = AdminKeysRouteImport.update({
   path: '/keys',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminFormInfosRoute = AdminFormInfosRouteImport.update({
+  id: '/form-infos',
+  path: '/form-infos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminDropdownsRoute = AdminDropdownsRouteImport.update({
   id: '/dropdowns',
   path: '/dropdowns',
@@ -75,83 +102,255 @@ const AdminDashboardRoute = AdminDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCharactersRoute = AdminCharactersRouteImport.update({
+  id: '/characters',
+  path: '/characters',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsersIndexRoute = AdminUsersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminUsersRoute,
+} as any)
+const AdminTemplatesIndexRoute = AdminTemplatesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminTemplatesRoute,
+} as any)
+const AdminStylesIndexRoute = AdminStylesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminStylesRoute,
+} as any)
+const AdminCharactersIndexRoute = AdminCharactersIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminCharactersRoute,
+} as any)
+const AdminTemplatesNewRoute = AdminTemplatesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminTemplatesRoute,
+} as any)
+const AdminStylesNewRoute = AdminStylesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminStylesRoute,
+} as any)
+const AdminCharactersNewRoute = AdminCharactersNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminCharactersRoute,
+} as any)
+const AdminUsersUserIdIndexRoute = AdminUsersUserIdIndexRouteImport.update({
+  id: '/$userId/',
+  path: '/$userId/',
+  getParentRoute: () => AdminUsersRoute,
+} as any)
+const AdminStylesStyleIdIndexRoute = AdminStylesStyleIdIndexRouteImport.update({
+  id: '/$styleId/',
+  path: '/$styleId/',
+  getParentRoute: () => AdminStylesRoute,
+} as any)
+const AdminCharactersCharacterIdIndexRoute =
+  AdminCharactersCharacterIdIndexRouteImport.update({
+    id: '/$characterId/',
+    path: '/$characterId/',
+    getParentRoute: () => AdminCharactersRoute,
+  } as any)
+const AdminUsersUserIdEditRoute = AdminUsersUserIdEditRouteImport.update({
+  id: '/$userId/edit',
+  path: '/$userId/edit',
+  getParentRoute: () => AdminUsersRoute,
+} as any)
+const AdminTemplatesTemplateIdEditRoute =
+  AdminTemplatesTemplateIdEditRouteImport.update({
+    id: '/$templateId/edit',
+    path: '/$templateId/edit',
+    getParentRoute: () => AdminTemplatesRoute,
+  } as any)
+const AdminStylesStyleIdEditRoute = AdminStylesStyleIdEditRouteImport.update({
+  id: '/$styleId/edit',
+  path: '/$styleId/edit',
+  getParentRoute: () => AdminStylesRoute,
+} as any)
+const AdminCharactersCharacterIdEditRoute =
+  AdminCharactersCharacterIdEditRouteImport.update({
+    id: '/$characterId/edit',
+    path: '/$characterId/edit',
+    getParentRoute: () => AdminCharactersRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/characters': typeof AdminCharactersRouteWithChildren
   '/dashboard': typeof AdminDashboardRoute
   '/dropdowns': typeof AdminDropdownsRoute
+  '/form-infos': typeof AdminFormInfosRoute
   '/keys': typeof AdminKeysRoute
   '/logs': typeof AdminLogsRoute
   '/settings': typeof AdminSettingsRoute
-  '/styles': typeof AdminStylesRoute
-  '/users': typeof AdminUsersRoute
+  '/styles': typeof AdminStylesRouteWithChildren
+  '/templates': typeof AdminTemplatesRouteWithChildren
+  '/users': typeof AdminUsersRouteWithChildren
   '/vouchers': typeof AdminVouchersRoute
+  '/characters/new': typeof AdminCharactersNewRoute
+  '/styles/new': typeof AdminStylesNewRoute
+  '/templates/new': typeof AdminTemplatesNewRoute
+  '/characters/': typeof AdminCharactersIndexRoute
+  '/styles/': typeof AdminStylesIndexRoute
+  '/templates/': typeof AdminTemplatesIndexRoute
+  '/users/': typeof AdminUsersIndexRoute
+  '/characters/$characterId/edit': typeof AdminCharactersCharacterIdEditRoute
+  '/styles/$styleId/edit': typeof AdminStylesStyleIdEditRoute
+  '/templates/$templateId/edit': typeof AdminTemplatesTemplateIdEditRoute
+  '/users/$userId/edit': typeof AdminUsersUserIdEditRoute
+  '/characters/$characterId/': typeof AdminCharactersCharacterIdIndexRoute
+  '/styles/$styleId/': typeof AdminStylesStyleIdIndexRoute
+  '/users/$userId/': typeof AdminUsersUserIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/dashboard': typeof AdminDashboardRoute
   '/dropdowns': typeof AdminDropdownsRoute
+  '/form-infos': typeof AdminFormInfosRoute
   '/keys': typeof AdminKeysRoute
   '/logs': typeof AdminLogsRoute
   '/settings': typeof AdminSettingsRoute
-  '/styles': typeof AdminStylesRoute
-  '/users': typeof AdminUsersRoute
   '/vouchers': typeof AdminVouchersRoute
+  '/characters/new': typeof AdminCharactersNewRoute
+  '/styles/new': typeof AdminStylesNewRoute
+  '/templates/new': typeof AdminTemplatesNewRoute
+  '/characters': typeof AdminCharactersIndexRoute
+  '/styles': typeof AdminStylesIndexRoute
+  '/templates': typeof AdminTemplatesIndexRoute
+  '/users': typeof AdminUsersIndexRoute
+  '/characters/$characterId/edit': typeof AdminCharactersCharacterIdEditRoute
+  '/styles/$styleId/edit': typeof AdminStylesStyleIdEditRoute
+  '/templates/$templateId/edit': typeof AdminTemplatesTemplateIdEditRoute
+  '/users/$userId/edit': typeof AdminUsersUserIdEditRoute
+  '/characters/$characterId': typeof AdminCharactersCharacterIdIndexRoute
+  '/styles/$styleId': typeof AdminStylesStyleIdIndexRoute
+  '/users/$userId': typeof AdminUsersUserIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_admin': typeof AdminRouteWithChildren
   '/login': typeof LoginRoute
+  '/_admin/characters': typeof AdminCharactersRouteWithChildren
   '/_admin/dashboard': typeof AdminDashboardRoute
   '/_admin/dropdowns': typeof AdminDropdownsRoute
+  '/_admin/form-infos': typeof AdminFormInfosRoute
   '/_admin/keys': typeof AdminKeysRoute
   '/_admin/logs': typeof AdminLogsRoute
   '/_admin/settings': typeof AdminSettingsRoute
-  '/_admin/styles': typeof AdminStylesRoute
-  '/_admin/users': typeof AdminUsersRoute
+  '/_admin/styles': typeof AdminStylesRouteWithChildren
+  '/_admin/templates': typeof AdminTemplatesRouteWithChildren
+  '/_admin/users': typeof AdminUsersRouteWithChildren
   '/_admin/vouchers': typeof AdminVouchersRoute
+  '/_admin/characters/new': typeof AdminCharactersNewRoute
+  '/_admin/styles/new': typeof AdminStylesNewRoute
+  '/_admin/templates/new': typeof AdminTemplatesNewRoute
+  '/_admin/characters/': typeof AdminCharactersIndexRoute
+  '/_admin/styles/': typeof AdminStylesIndexRoute
+  '/_admin/templates/': typeof AdminTemplatesIndexRoute
+  '/_admin/users/': typeof AdminUsersIndexRoute
+  '/_admin/characters/$characterId/edit': typeof AdminCharactersCharacterIdEditRoute
+  '/_admin/styles/$styleId/edit': typeof AdminStylesStyleIdEditRoute
+  '/_admin/templates/$templateId/edit': typeof AdminTemplatesTemplateIdEditRoute
+  '/_admin/users/$userId/edit': typeof AdminUsersUserIdEditRoute
+  '/_admin/characters/$characterId/': typeof AdminCharactersCharacterIdIndexRoute
+  '/_admin/styles/$styleId/': typeof AdminStylesStyleIdIndexRoute
+  '/_admin/users/$userId/': typeof AdminUsersUserIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/login'
+    | '/characters'
     | '/dashboard'
     | '/dropdowns'
+    | '/form-infos'
     | '/keys'
     | '/logs'
     | '/settings'
     | '/styles'
+    | '/templates'
     | '/users'
     | '/vouchers'
+    | '/characters/new'
+    | '/styles/new'
+    | '/templates/new'
+    | '/characters/'
+    | '/styles/'
+    | '/templates/'
+    | '/users/'
+    | '/characters/$characterId/edit'
+    | '/styles/$styleId/edit'
+    | '/templates/$templateId/edit'
+    | '/users/$userId/edit'
+    | '/characters/$characterId/'
+    | '/styles/$styleId/'
+    | '/users/$userId/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
     | '/dashboard'
     | '/dropdowns'
+    | '/form-infos'
     | '/keys'
     | '/logs'
     | '/settings'
-    | '/styles'
-    | '/users'
     | '/vouchers'
+    | '/characters/new'
+    | '/styles/new'
+    | '/templates/new'
+    | '/characters'
+    | '/styles'
+    | '/templates'
+    | '/users'
+    | '/characters/$characterId/edit'
+    | '/styles/$styleId/edit'
+    | '/templates/$templateId/edit'
+    | '/users/$userId/edit'
+    | '/characters/$characterId'
+    | '/styles/$styleId'
+    | '/users/$userId'
   id:
     | '__root__'
     | '/'
     | '/_admin'
     | '/login'
+    | '/_admin/characters'
     | '/_admin/dashboard'
     | '/_admin/dropdowns'
+    | '/_admin/form-infos'
     | '/_admin/keys'
     | '/_admin/logs'
     | '/_admin/settings'
     | '/_admin/styles'
+    | '/_admin/templates'
     | '/_admin/users'
     | '/_admin/vouchers'
+    | '/_admin/characters/new'
+    | '/_admin/styles/new'
+    | '/_admin/templates/new'
+    | '/_admin/characters/'
+    | '/_admin/styles/'
+    | '/_admin/templates/'
+    | '/_admin/users/'
+    | '/_admin/characters/$characterId/edit'
+    | '/_admin/styles/$styleId/edit'
+    | '/_admin/templates/$templateId/edit'
+    | '/_admin/users/$userId/edit'
+    | '/_admin/characters/$characterId/'
+    | '/_admin/styles/$styleId/'
+    | '/_admin/users/$userId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -197,6 +396,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/_admin/templates': {
+      id: '/_admin/templates'
+      path: '/templates'
+      fullPath: '/templates'
+      preLoaderRoute: typeof AdminTemplatesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_admin/styles': {
       id: '/_admin/styles'
       path: '/styles'
@@ -225,6 +431,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminKeysRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/_admin/form-infos': {
+      id: '/_admin/form-infos'
+      path: '/form-infos'
+      fullPath: '/form-infos'
+      preLoaderRoute: typeof AdminFormInfosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/_admin/dropdowns': {
       id: '/_admin/dropdowns'
       path: '/dropdowns'
@@ -239,28 +452,207 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/_admin/characters': {
+      id: '/_admin/characters'
+      path: '/characters'
+      fullPath: '/characters'
+      preLoaderRoute: typeof AdminCharactersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/_admin/users/': {
+      id: '/_admin/users/'
+      path: '/'
+      fullPath: '/users/'
+      preLoaderRoute: typeof AdminUsersIndexRouteImport
+      parentRoute: typeof AdminUsersRoute
+    }
+    '/_admin/templates/': {
+      id: '/_admin/templates/'
+      path: '/'
+      fullPath: '/templates/'
+      preLoaderRoute: typeof AdminTemplatesIndexRouteImport
+      parentRoute: typeof AdminTemplatesRoute
+    }
+    '/_admin/styles/': {
+      id: '/_admin/styles/'
+      path: '/'
+      fullPath: '/styles/'
+      preLoaderRoute: typeof AdminStylesIndexRouteImport
+      parentRoute: typeof AdminStylesRoute
+    }
+    '/_admin/characters/': {
+      id: '/_admin/characters/'
+      path: '/'
+      fullPath: '/characters/'
+      preLoaderRoute: typeof AdminCharactersIndexRouteImport
+      parentRoute: typeof AdminCharactersRoute
+    }
+    '/_admin/templates/new': {
+      id: '/_admin/templates/new'
+      path: '/new'
+      fullPath: '/templates/new'
+      preLoaderRoute: typeof AdminTemplatesNewRouteImport
+      parentRoute: typeof AdminTemplatesRoute
+    }
+    '/_admin/styles/new': {
+      id: '/_admin/styles/new'
+      path: '/new'
+      fullPath: '/styles/new'
+      preLoaderRoute: typeof AdminStylesNewRouteImport
+      parentRoute: typeof AdminStylesRoute
+    }
+    '/_admin/characters/new': {
+      id: '/_admin/characters/new'
+      path: '/new'
+      fullPath: '/characters/new'
+      preLoaderRoute: typeof AdminCharactersNewRouteImport
+      parentRoute: typeof AdminCharactersRoute
+    }
+    '/_admin/users/$userId/': {
+      id: '/_admin/users/$userId/'
+      path: '/$userId'
+      fullPath: '/users/$userId/'
+      preLoaderRoute: typeof AdminUsersUserIdIndexRouteImport
+      parentRoute: typeof AdminUsersRoute
+    }
+    '/_admin/styles/$styleId/': {
+      id: '/_admin/styles/$styleId/'
+      path: '/$styleId'
+      fullPath: '/styles/$styleId/'
+      preLoaderRoute: typeof AdminStylesStyleIdIndexRouteImport
+      parentRoute: typeof AdminStylesRoute
+    }
+    '/_admin/characters/$characterId/': {
+      id: '/_admin/characters/$characterId/'
+      path: '/$characterId'
+      fullPath: '/characters/$characterId/'
+      preLoaderRoute: typeof AdminCharactersCharacterIdIndexRouteImport
+      parentRoute: typeof AdminCharactersRoute
+    }
+    '/_admin/users/$userId/edit': {
+      id: '/_admin/users/$userId/edit'
+      path: '/$userId/edit'
+      fullPath: '/users/$userId/edit'
+      preLoaderRoute: typeof AdminUsersUserIdEditRouteImport
+      parentRoute: typeof AdminUsersRoute
+    }
+    '/_admin/templates/$templateId/edit': {
+      id: '/_admin/templates/$templateId/edit'
+      path: '/$templateId/edit'
+      fullPath: '/templates/$templateId/edit'
+      preLoaderRoute: typeof AdminTemplatesTemplateIdEditRouteImport
+      parentRoute: typeof AdminTemplatesRoute
+    }
+    '/_admin/styles/$styleId/edit': {
+      id: '/_admin/styles/$styleId/edit'
+      path: '/$styleId/edit'
+      fullPath: '/styles/$styleId/edit'
+      preLoaderRoute: typeof AdminStylesStyleIdEditRouteImport
+      parentRoute: typeof AdminStylesRoute
+    }
+    '/_admin/characters/$characterId/edit': {
+      id: '/_admin/characters/$characterId/edit'
+      path: '/$characterId/edit'
+      fullPath: '/characters/$characterId/edit'
+      preLoaderRoute: typeof AdminCharactersCharacterIdEditRouteImport
+      parentRoute: typeof AdminCharactersRoute
+    }
   }
 }
 
+interface AdminCharactersRouteChildren {
+  AdminCharactersNewRoute: typeof AdminCharactersNewRoute
+  AdminCharactersIndexRoute: typeof AdminCharactersIndexRoute
+  AdminCharactersCharacterIdEditRoute: typeof AdminCharactersCharacterIdEditRoute
+  AdminCharactersCharacterIdIndexRoute: typeof AdminCharactersCharacterIdIndexRoute
+}
+
+const AdminCharactersRouteChildren: AdminCharactersRouteChildren = {
+  AdminCharactersNewRoute: AdminCharactersNewRoute,
+  AdminCharactersIndexRoute: AdminCharactersIndexRoute,
+  AdminCharactersCharacterIdEditRoute: AdminCharactersCharacterIdEditRoute,
+  AdminCharactersCharacterIdIndexRoute: AdminCharactersCharacterIdIndexRoute,
+}
+
+const AdminCharactersRouteWithChildren = AdminCharactersRoute._addFileChildren(
+  AdminCharactersRouteChildren,
+)
+
+interface AdminStylesRouteChildren {
+  AdminStylesNewRoute: typeof AdminStylesNewRoute
+  AdminStylesIndexRoute: typeof AdminStylesIndexRoute
+  AdminStylesStyleIdEditRoute: typeof AdminStylesStyleIdEditRoute
+  AdminStylesStyleIdIndexRoute: typeof AdminStylesStyleIdIndexRoute
+}
+
+const AdminStylesRouteChildren: AdminStylesRouteChildren = {
+  AdminStylesNewRoute: AdminStylesNewRoute,
+  AdminStylesIndexRoute: AdminStylesIndexRoute,
+  AdminStylesStyleIdEditRoute: AdminStylesStyleIdEditRoute,
+  AdminStylesStyleIdIndexRoute: AdminStylesStyleIdIndexRoute,
+}
+
+const AdminStylesRouteWithChildren = AdminStylesRoute._addFileChildren(
+  AdminStylesRouteChildren,
+)
+
+interface AdminTemplatesRouteChildren {
+  AdminTemplatesNewRoute: typeof AdminTemplatesNewRoute
+  AdminTemplatesIndexRoute: typeof AdminTemplatesIndexRoute
+  AdminTemplatesTemplateIdEditRoute: typeof AdminTemplatesTemplateIdEditRoute
+}
+
+const AdminTemplatesRouteChildren: AdminTemplatesRouteChildren = {
+  AdminTemplatesNewRoute: AdminTemplatesNewRoute,
+  AdminTemplatesIndexRoute: AdminTemplatesIndexRoute,
+  AdminTemplatesTemplateIdEditRoute: AdminTemplatesTemplateIdEditRoute,
+}
+
+const AdminTemplatesRouteWithChildren = AdminTemplatesRoute._addFileChildren(
+  AdminTemplatesRouteChildren,
+)
+
+interface AdminUsersRouteChildren {
+  AdminUsersIndexRoute: typeof AdminUsersIndexRoute
+  AdminUsersUserIdEditRoute: typeof AdminUsersUserIdEditRoute
+  AdminUsersUserIdIndexRoute: typeof AdminUsersUserIdIndexRoute
+}
+
+const AdminUsersRouteChildren: AdminUsersRouteChildren = {
+  AdminUsersIndexRoute: AdminUsersIndexRoute,
+  AdminUsersUserIdEditRoute: AdminUsersUserIdEditRoute,
+  AdminUsersUserIdIndexRoute: AdminUsersUserIdIndexRoute,
+}
+
+const AdminUsersRouteWithChildren = AdminUsersRoute._addFileChildren(
+  AdminUsersRouteChildren,
+)
+
 interface AdminRouteChildren {
+  AdminCharactersRoute: typeof AdminCharactersRouteWithChildren
   AdminDashboardRoute: typeof AdminDashboardRoute
   AdminDropdownsRoute: typeof AdminDropdownsRoute
+  AdminFormInfosRoute: typeof AdminFormInfosRoute
   AdminKeysRoute: typeof AdminKeysRoute
   AdminLogsRoute: typeof AdminLogsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
-  AdminStylesRoute: typeof AdminStylesRoute
-  AdminUsersRoute: typeof AdminUsersRoute
+  AdminStylesRoute: typeof AdminStylesRouteWithChildren
+  AdminTemplatesRoute: typeof AdminTemplatesRouteWithChildren
+  AdminUsersRoute: typeof AdminUsersRouteWithChildren
   AdminVouchersRoute: typeof AdminVouchersRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
+  AdminCharactersRoute: AdminCharactersRouteWithChildren,
   AdminDashboardRoute: AdminDashboardRoute,
   AdminDropdownsRoute: AdminDropdownsRoute,
+  AdminFormInfosRoute: AdminFormInfosRoute,
   AdminKeysRoute: AdminKeysRoute,
   AdminLogsRoute: AdminLogsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
-  AdminStylesRoute: AdminStylesRoute,
-  AdminUsersRoute: AdminUsersRoute,
+  AdminStylesRoute: AdminStylesRouteWithChildren,
+  AdminTemplatesRoute: AdminTemplatesRouteWithChildren,
+  AdminUsersRoute: AdminUsersRouteWithChildren,
   AdminVouchersRoute: AdminVouchersRoute,
 }
 
