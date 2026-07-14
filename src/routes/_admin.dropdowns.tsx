@@ -46,28 +46,63 @@ const EMPTY_FORM: Omit<DropdownOption, "id"> = {
 
 // Group metadata
 const GROUP_META: Record<string, { label: string; color: string; dot: string; emoji: string }> = {
-  gaya_poster:         { label: "Gaya Poster",          color: "bg-yellow-50 border-yellow-400",   dot: "bg-yellow-400",   emoji: "🎨" },
-  tata_letak_poster:   { label: "Tata Letak Poster",    color: "bg-blue-50 border-blue-400",       dot: "bg-blue-400",     emoji: "🗂️" },
-  rasio_poster:        { label: "Rasio Poster",          color: "bg-purple-50 border-purple-400",   dot: "bg-purple-400",   emoji: "📐" },
-  palet_warna:         { label: "Palet Warna",           color: "bg-pink-50 border-pink-400",       dot: "bg-pink-400",     emoji: "🌈" },
-  nuansa_mood:         { label: "Nuansa Mood",           color: "bg-orange-50 border-orange-400",   dot: "bg-orange-400",   emoji: "☀️" },
-  aturan_teks:         { label: "Aturan Teks",           color: "bg-red-50 border-red-400",         dot: "bg-red-400",      emoji: "🔒" },
-  fokus_karakter:      { label: "Fokus Karakter",        color: "bg-green-50 border-green-400",     dot: "bg-green-400",    emoji: "🎲" },
-  gaya_banner:         { label: "Gaya Banner",           color: "bg-cyan-50 border-cyan-400",       dot: "bg-cyan-400",     emoji: "🏷️" },
-  rasio_banner:        { label: "Rasio Banner",          color: "bg-teal-50 border-teal-400",       dot: "bg-teal-400",     emoji: "📏" },
-  gaya_baliho:         { label: "Gaya Baliho",           color: "bg-indigo-50 border-indigo-400",   dot: "bg-indigo-400",   emoji: "🏢" },
-  rasio_baliho:        { label: "Rasio Baliho",          color: "bg-violet-50 border-violet-400",   dot: "bg-violet-400",   emoji: "📺" },
-  gaya_edukasi:        { label: "Gaya Edukasi",          color: "bg-lime-50 border-lime-400",       dot: "bg-lime-400",     emoji: "📚" },
-  jenis_materi:        { label: "Jenis Materi",          color: "bg-amber-50 border-amber-400",     dot: "bg-amber-400",    emoji: "📖" },
-  gaya_quotes:         { label: "Gaya Quotes",           color: "bg-rose-50 border-rose-400",       dot: "bg-rose-400",     emoji: "✍️" },
-  tema_quotes:         { label: "Tema Quotes",           color: "bg-fuchsia-50 border-fuchsia-400", dot: "bg-fuchsia-400",  emoji: "💬" },
-  rasio_quotes:        { label: "Rasio Quotes",          color: "bg-sky-50 border-sky-400",         dot: "bg-sky-400",      emoji: "📱" },
-  gaya_logo:           { label: "Gaya Logo",             color: "bg-emerald-50 border-emerald-400", dot: "bg-emerald-400",  emoji: "💎" },
-  industri_logo:       { label: "Industri Logo",         color: "bg-stone-50 border-stone-400",     dot: "bg-stone-400",    emoji: "🏭" },
-  gaya_digital:        { label: "Gaya Digital Product",  color: "bg-blue-50 border-blue-300",       dot: "bg-blue-300",     emoji: "💿" },
-  enhance_style:       { label: "Enhance Style",         color: "bg-pink-50 border-pink-300",       dot: "bg-pink-300",     emoji: "✨" },
-  change_level:        { label: "Tingkat Perubahan",     color: "bg-green-50 border-green-300",     dot: "bg-green-300",    emoji: "🌱" },
+  gaya_poster:           { label: "Gaya Poster",          color: "bg-yellow-50 border-yellow-400",   dot: "bg-yellow-400",   emoji: "🎨" },
+  tata_letak_poster:     { label: "Tata Letak Poster",    color: "bg-blue-50 border-blue-400",       dot: "bg-blue-400",     emoji: "🗂️" },
+  rasio_poster:          { label: "Rasio Poster",          color: "bg-purple-50 border-purple-400",   dot: "bg-purple-400",   emoji: "📐" },
+  palet_warna_poster:    { label: "Palet Warna Poster",   color: "bg-pink-50 border-pink-400",       dot: "bg-pink-400",     emoji: "🌈" },
+  mood_poster:           { label: "Mood Poster",          color: "bg-orange-50 border-orange-400",   dot: "bg-orange-400",   emoji: "☀️" },
+  aturan_teks_poster:    { label: "Aturan Teks Poster",   color: "bg-red-50 border-red-400",         dot: "bg-red-400",      emoji: "🔒" },
+  fokus_karakter_poster: { label: "Fokus Karakter Poster", color: "bg-green-50 border-green-400",     dot: "bg-green-400",    emoji: "🎲" },
+
+  gaya_banner:           { label: "Gaya Banner",          color: "bg-cyan-50 border-cyan-400",       dot: "bg-cyan-400",     emoji: "🏷️" },
+  rasio_banner:          { label: "Rasio Banner",         color: "bg-teal-50 border-teal-400",       dot: "bg-teal-400",     emoji: "📏" },
+  palet_warna_banner:    { label: "Palet Warna Banner",   color: "bg-pink-50 border-pink-400",       dot: "bg-pink-400",     emoji: "🌈" },
+  aturan_teks_banner:    { label: "Aturan Teks Banner",   color: "bg-red-50 border-red-400",         dot: "bg-red-400",      emoji: "🔒" },
+
+  gaya_edukasi:          { label: "Gaya Edukasi",          color: "bg-lime-50 border-lime-400",       dot: "bg-lime-400",     emoji: "📚" },
+  rasio_edukasi:         { label: "Rasio Edukasi",         color: "bg-teal-50 border-teal-400",       dot: "bg-teal-400",     emoji: "📏" },
+  tata_letak_edukasi:    { label: "Tata Letak Edukasi",    color: "bg-blue-50 border-blue-400",       dot: "bg-blue-400",     emoji: "🗂️" },
+  palet_warna_edukasi:   { label: "Palet Warna Edukasi",   color: "bg-pink-50 border-pink-400",       dot: "bg-pink-400",     emoji: "🌈" },
+
+  gaya_affiliate:        { label: "Gaya Affiliate",        color: "bg-amber-50 border-amber-400",     dot: "bg-amber-400",    emoji: "🛍️" },
+  cta_affiliate:         { label: "CTA Affiliate",         color: "bg-rose-50 border-rose-400",       dot: "bg-rose-400",     emoji: "👉" },
+  rasio_affiliate:       { label: "Rasio Affiliate",       color: "bg-sky-50 border-sky-400",         dot: "bg-sky-400",      emoji: "📱" },
+  palet_warna_affiliate: { label: "Palet Warna Affiliate", color: "bg-pink-50 border-pink-400",       dot: "bg-pink-400",     emoji: "🌈" },
+
+  gaya_digital_product:  { label: "Gaya Digital Product",  color: "bg-blue-50 border-blue-300",       dot: "bg-blue-300",     emoji: "💿" },
+  rasio_digital_product: { label: "Rasio Digital Product", color: "bg-purple-50 border-purple-300",   dot: "bg-purple-300",   emoji: "📐" },
+  palet_warna_digital:   { label: "Palet Warna Digital",   color: "bg-pink-50 border-pink-300",       dot: "bg-pink-300",     emoji: "🌈" },
+
+  gaya_baliho:           { label: "Gaya Baliho",           color: "bg-indigo-50 border-indigo-400",   dot: "bg-indigo-400",   emoji: "🏢" },
+  rasio_baliho:          { label: "Rasio Baliho",          color: "bg-violet-50 border-violet-400",   dot: "bg-violet-400",   emoji: "📺" },
+  tata_letak_baliho:     { label: "Tata Letak Baliho",     color: "bg-blue-50 border-blue-400",       dot: "bg-blue-400",     emoji: "🗂️" },
+  palet_warna_baliho:    { label: "Palet Warna Baliho",    color: "bg-pink-50 border-pink-400",       dot: "bg-pink-400",     emoji: "🌈" },
+
+  gaya_logo:             { label: "Gaya Logo",             color: "bg-emerald-50 border-emerald-400", dot: "bg-emerald-400",  emoji: "💎" },
+  palet_warna_logo:      { label: "Palet Warna Logo",      color: "bg-pink-50 border-pink-400",       dot: "bg-pink-400",     emoji: "🌈" },
+  aturan_teks_logo:      { label: "Aturan Teks Logo",      color: "bg-red-50 border-red-400",         dot: "bg-red-400",      emoji: "🔒" },
+
+  gaya_quotes:           { label: "Gaya Quotes",           color: "bg-rose-50 border-rose-400",       dot: "bg-rose-400",     emoji: "✍️" },
+  tema_quotes:           { label: "Tema Quotes",           color: "bg-fuchsia-50 border-fuchsia-400", dot: "bg-fuchsia-400",  emoji: "💬" },
+  rasio_quotes:          { label: "Rasio Quotes",          color: "bg-sky-50 border-sky-400",         dot: "bg-sky-400",      emoji: "📱" },
+  palet_warna_quotes:    { label: "Palet Warna Quotes",    color: "bg-pink-50 border-pink-400",       dot: "bg-pink-400",     emoji: "🌈" },
+
+  enhance_style:         { label: "Enhance Style",         color: "bg-pink-50 border-pink-300",       dot: "bg-pink-300",     emoji: "✨" },
+  change_level:          { label: "Tingkat Perubahan",     color: "bg-green-50 border-green-300",     dot: "bg-green-300",    emoji: "🌱" },
 };
+
+const FEATURE_TABS = [
+  { id: "poster", label: "Poster", emoji: "🎨", groups: ["gaya_poster", "tata_letak_poster", "rasio_poster", "palet_warna_poster", "mood_poster", "aturan_teks_poster", "fokus_karakter_poster"] },
+  { id: "banner", label: "Banner", emoji: "🏷️", groups: ["gaya_banner", "rasio_banner", "palet_warna_banner", "aturan_teks_banner"] },
+  { id: "edukasi", label: "Edukasi", emoji: "📚", groups: ["gaya_edukasi", "rasio_edukasi", "tata_letak_edukasi", "palet_warna_edukasi"] },
+  { id: "affiliate", label: "Affiliate", emoji: "🛍️", groups: ["gaya_affiliate", "cta_affiliate", "rasio_affiliate", "palet_warna_affiliate"] },
+  { id: "digital", label: "Produk Digital", emoji: "💿", groups: ["gaya_digital_product", "rasio_digital_product", "palet_warna_digital"] },
+  { id: "baliho", label: "Baliho", emoji: "🏢", groups: ["gaya_baliho", "rasio_baliho", "tata_letak_baliho", "palet_warna_baliho"] },
+  { id: "logo", label: "Logo", emoji: "💎", groups: ["gaya_logo", "palet_warna_logo", "aturan_teks_logo"] },
+  { id: "quotes", label: "Quotes", emoji: "✍️", groups: ["gaya_quotes", "tema_quotes", "rasio_quotes", "palet_warna_quotes"] },
+  { id: "enhance", label: "Percantik Foto", emoji: "✨", groups: ["enhance_style", "change_level"] },
+  { id: "all", label: "Semua", emoji: "📋", groups: [] },
+];
 
 function getMeta(key: string) {
   return GROUP_META[key] ?? {
@@ -85,6 +120,7 @@ function DropdownsPage() {
   const qc = useQueryClient();
 
   // Panel state: null = hidden, "new" = adding new, DropdownOption = editing
+  const [activeFeatureTab, setActiveFeatureTab] = useState("poster");
   const [panel, setPanel] = useState<null | "new" | DropdownOption>(null);
   const [form, setForm] = useState<Omit<DropdownOption, "id">>(EMPTY_FORM);
   const [customGroup, setCustomGroup] = useState("");
@@ -107,10 +143,11 @@ function DropdownsPage() {
   // ── Auto-expand first group on load ──
   useEffect(() => {
     if (data.length > 0 && expandedGroups.size === 0) {
-      const firstGroup = data[0]?.groupKey;
+      const activeTabObj = FEATURE_TABS.find((t) => t.id === activeFeatureTab);
+      const firstGroup = activeTabObj && activeTabObj.id !== "all" ? activeTabObj.groups[0] : data[0]?.groupKey;
       if (firstGroup) setExpandedGroups(new Set([firstGroup]));
     }
-  }, [data]);
+  }, [data, activeFeatureTab]);
 
   // ── Groups ──
   const allGroups = useMemo(() => Array.from(new Set(data.map((d) => d.groupKey))).sort(), [data]);
@@ -118,7 +155,12 @@ function DropdownsPage() {
   // ── Filtered + Grouped ──
   const grouped = useMemo(() => {
     const map: Record<string, DropdownOption[]> = {};
+    const activeTabObj = FEATURE_TABS.find((t) => t.id === activeFeatureTab);
+    const allowedGroups = activeTabObj && activeTabObj.id !== "all" ? activeTabObj.groups : null;
+
     for (const item of data) {
+      if (allowedGroups && !allowedGroups.includes(item.groupKey)) continue;
+
       const matchGroup = filterGroup === "__all__" || item.groupKey === filterGroup;
       const q = search.toLowerCase();
       const matchSearch = !q || item.label.toLowerCase().includes(q) || item.value.toLowerCase().includes(q);
@@ -127,7 +169,7 @@ function DropdownsPage() {
       map[item.groupKey].push(item);
     }
     return map;
-  }, [data, filterGroup, search]);
+  }, [data, filterGroup, search, activeFeatureTab]);
 
   // ── Mutations ──
   const saveMut = useMutation({
@@ -159,7 +201,9 @@ function DropdownsPage() {
 
   // ── Panel openers ──
   function openNew(defaultGroup = "") {
-    setForm({ ...EMPTY_FORM, groupKey: defaultGroup });
+    const activeTabObj = FEATURE_TABS.find((t) => t.id === activeFeatureTab);
+    const initialGroup = defaultGroup || (activeTabObj && activeTabObj.id !== "all" ? activeTabObj.groups[0] : "");
+    setForm({ ...EMPTY_FORM, groupKey: initialGroup });
     setCustomGroup("");
     setPanel("new");
   }
@@ -244,6 +288,28 @@ function DropdownsPage() {
         {/* ── LEFT: Filter + List ── */}
         <div className={`flex-1 min-w-0 space-y-4 transition-all duration-200 ${panel ? "lg:max-w-[55%]" : "max-w-full"}`}>
 
+          {/* Feature Tabs */}
+          <div className="flex flex-wrap gap-1.5 border-b-[3px] border-black pb-3 overflow-x-auto">
+            {FEATURE_TABS.map((tab) => {
+              const isActive = activeFeatureTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveFeatureTab(tab.id);
+                    setFilterGroup("__all__");
+                  }}
+                  className={`nb-border nb-shadow-sm nb-press rounded-[var(--radius)] text-xs font-black uppercase px-3.5 py-2 flex items-center gap-1.5 transition-all ${
+                    isActive ? "bg-black text-white" : "bg-white text-black hover:bg-gray-50"
+                  }`}
+                >
+                  <span>{tab.emoji}</span>
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
           {/* Filter bar */}
           <div className="flex flex-wrap gap-2">
             <div className="relative flex-1 min-w-[160px]">
@@ -262,9 +328,14 @@ function DropdownsPage() {
                 className="nb-border nb-shadow-sm rounded-[var(--radius)] bg-white text-[11px] font-bold uppercase pl-3 pr-7 py-2 appearance-none outline-none cursor-pointer"
               >
                 <option value="__all__">Semua Grup</option>
-                {allGroups.map((g) => (
-                  <option key={g} value={g}>{getMeta(g).emoji} {getMeta(g).label}</option>
-                ))}
+                {allGroups
+                  .filter((g) => {
+                    const activeTabObj = FEATURE_TABS.find((t) => t.id === activeFeatureTab);
+                    return !activeTabObj || activeTabObj.id === "all" || activeTabObj.groups.includes(g);
+                  })
+                  .map((g) => (
+                    <option key={g} value={g}>{getMeta(g).emoji} {getMeta(g).label}</option>
+                  ))}
               </select>
               <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 pointer-events-none" />
             </div>
@@ -479,11 +550,29 @@ function DropdownsPage() {
                       className="nb-border nb-shadow-sm rounded-[var(--radius)] bg-white text-sm font-semibold px-3 py-2.5 w-full appearance-none outline-none pr-8"
                     >
                       <option value="">-- Pilih Grup --</option>
-                      {allGroups.map((g) => (
-                        <option key={g} value={g}>
-                          {getMeta(g).emoji} {getMeta(g).label}
-                        </option>
-                      ))}
+                      {activeFeatureTab !== "all" && (
+                        <optgroup label={`Grup Khusus ${FEATURE_TABS.find(t => t.id === activeFeatureTab)?.label}`}>
+                          {FEATURE_TABS.find(t => t.id === activeFeatureTab)?.groups
+                            .filter(g => allGroups.includes(g))
+                            .map((g) => (
+                              <option key={g} value={g}>
+                                {getMeta(g).emoji} {getMeta(g).label} ({g})
+                              </option>
+                            ))}
+                        </optgroup>
+                      )}
+                      <optgroup label="Grup Lainnya">
+                        {allGroups
+                          .filter((g) => {
+                            const activeTabObj = FEATURE_TABS.find((t) => t.id === activeFeatureTab);
+                            return activeTabObj?.id === "all" || !activeTabObj?.groups.includes(g);
+                          })
+                          .map((g) => (
+                            <option key={g} value={g}>
+                              {getMeta(g).emoji} {getMeta(g).label} ({g})
+                            </option>
+                          ))}
+                      </optgroup>
                       <option value="__new__">➕ Buat Grup Baru…</option>
                     </select>
                     <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none text-muted-foreground" />
