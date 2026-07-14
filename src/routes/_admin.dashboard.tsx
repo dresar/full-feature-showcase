@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { api, tokenStore } from "@/lib/api";
 import { nb } from "@/lib/nb";
 import { RefreshCw, Users, Ticket, Sparkles, KeyRound } from "lucide-react";
 import {
@@ -39,6 +39,7 @@ function DashboardPage() {
         usage7d: d.chartData || [],
       };
     },
+    enabled: tokenStore.user?.role === "ADMIN",
   });
 
   const s = data || {};

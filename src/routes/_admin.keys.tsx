@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { api } from "@/lib/api";
 import { nb } from "@/lib/nb";
@@ -41,6 +41,7 @@ function statusBadge(s?: string) {
 function KeysPage() {
   const qc = useQueryClient();
   const [activeTab, setActiveTab] = useState<'pool' | 'developer'>('pool');
+  const [providerTab, setProviderTab] = useState<'gemini' | 'groq'>('gemini');
 
   // Pool Keys States
   const [open, setOpen] = useState(false);
@@ -70,6 +71,15 @@ function KeysPage() {
       }));
     },
   });
+
+  // Auto-calculate priority when modal opens or provider changes
+  useEffect(() => {
+    if (open) {
+      const providerKeys = data.filter(k => (k.provider || 'gemini').toLowerCase() === provider.toLowerCase());
+      const maxPrio = providerKeys.length > 0 ? Math.max(...providerKeys.map(k => k.priority || 0)) : 0;
+      setPriority(maxPrio + 1);
+    }
+  }, [open, provider, data]);
 
   const { data: devKeys = [], isLoading: devLoading } = useQuery<any[]>({
     queryKey: ["admin", "devKeys"],
@@ -211,10 +221,34 @@ function KeysPage() {
                 <RefreshCw className={`w-4 h-4 mr-2 inline ${testAllMut.isPending ? "animate-spin" : ""}`} />
                 {testAllMut.isPending ? "MENGUJI…" : "TES SEMUA KUNCI"}
               </button>
-              <button onClick={() => setOpen(true)} className={`${nb.btn} ${nb.btnPink}`}>
+              <button onClick={() => { setProvider(providerTab); setOpen(true); }} className={`${nb.btn} ${nb.btnPink}`}>
                 <Plus className="w-4 h-4" /> Tambah Kunci Pool
               </button>
             </div>
+          </div>
+
+          {/* Provider Tabs (Sub-tabs) */}
+          <div className="flex gap-2 mb-4">
+            <button
+              onClick={() => setProviderTab('gemini')}
+              className={`px-4 py-2 font-bold uppercase text-xs rounded-md transition-all border-2 border-black ${
+                providerTab === 'gemini'
+                  ? 'bg-blue-100 text-blue-800 shadow-[0_2px_0_0_rgba(0,0,0,1)]'
+                  : 'bg-white text-gray-500 hover:bg-gray-100'
+              }`}
+            >
+              Gemini Keys
+            </button>
+            <button
+              onClick={() => setProviderTab('groq')}
+              className={`px-4 py-2 font-bold uppercase text-xs rounded-md transition-all border-2 border-black ${
+                providerTab === 'groq'
+                  ? 'bg-orange-100 text-orange-800 shadow-[0_2px_0_0_rgba(0,0,0,1)]'
+                  : 'bg-white text-gray-500 hover:bg-gray-100'
+              }`}
+            >
+              Groq Keys
+            </button>
           </div>
 
           {/* Mobile Card List */}
@@ -224,12 +258,12 @@ function KeysPage() {
                 Memuat…
               </div>
             )}
-            {!isLoading && data.length === 0 && (
+            {!isLoading && data.filter((k) => (k.provider || 'gemini') === providerTab).length === 0 && (
               <div className={`${nb.card} p-8 text-center text-muted-foreground`}>
-                Belum ada kunci pool terdaftar.
+                Belum ada kunci {providerTab.toUpperCase()} terdaftar.
               </div>
             )}
-            {data.map((k) => (
+            {data.filter((k) => (k.provider || 'gemini') === providerTab).map((k) => (
               <div key={k.id} className={`${nb.card} p-4 space-y-3 font-mono text-sm`}>
                 <div className="flex items-center justify-between border-b-2 border-black/10 pb-2">
                   <span className="font-bold inline-flex items-center gap-1.5 truncate mr-2">
@@ -319,14 +353,14 @@ function KeysPage() {
                       </td>
                     </tr>
                   )}
-                  {!isLoading && data.length === 0 && (
+                  {!isLoading && data.filter((k) => (k.provider || 'gemini') === providerTab).length === 0 && (
                     <tr>
                       <td colSpan={7} className="px-4 py-8 text-center text-muted-foreground">
-                        Belum ada kunci pool terdaftar.
+                        Belum ada kunci {providerTab.toUpperCase()} terdaftar.
                       </td>
                     </tr>
                   )}
-                  {data.map((k) => (
+                  {data.filter((k) => (k.provider || 'gemini') === providerTab).map((k) => (
                     <tr key={k.id} className="border-b-2 border-black/10">
                       <td className="px-4 py-3 flex items-center gap-2">
                         <KeyRound className="w-4 h-4" />

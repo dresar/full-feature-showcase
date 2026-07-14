@@ -11,9 +11,10 @@ function Index() {
   useEffect(() => {
     const t = tokenStore.access;
     const u = tokenStore.user;
-    if (t && u?.role === "ADMIN") {
+    if (t && u && u.role === "ADMIN") {
       navigate({ to: "/dashboard" });
     } else {
+      if (t) tokenStore.clear();
       navigate({ to: "/login" });
     }
   }, [navigate]);

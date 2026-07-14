@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@/lib/api";
+import { api, tokenStore } from "@/lib/api";
 import { nb } from "@/lib/nb";
 import { Users, Calendar, Award, Edit2, Eye } from "lucide-react";
 
@@ -27,6 +27,7 @@ function UsersIndexPage() {
       const res = await api<any>("/admin/users");
       return res.data || [];
     },
+    enabled: tokenStore.user?.role === "ADMIN",
   });
 
   return (

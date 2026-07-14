@@ -3,7 +3,9 @@
 
 export const API_BASE_URL =
   (typeof import.meta !== "undefined" && (import.meta as any).env?.VITE_API_BASE_URL) ||
-  "https://porto.apprentice.cyou/api";
+  (typeof window !== "undefined" && window.location.hostname === "localhost" 
+    ? "http://localhost:3000/api" 
+    : "https://porto.apprentice.cyou/api");
 
 const TOKEN_KEY = "access_token";
 const REFRESH_KEY = "refresh_token";
